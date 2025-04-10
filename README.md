@@ -46,13 +46,52 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 5. Executar migrações
+### 5. Configuração da Chave de API de IA
+#### 5.1 Adicione no seu arquivo .env:
+
+```ini
+AI_API_KEY=sua_chave_da_api_aqui
+AI_SERVICE_URL=https://api.servico-ia.com/v1/generate
+```
+#### 5.2 Configure no arquivo config/services.php:
+
+```php
+'ai' => [
+    'api_key' => env('AI_API_KEY'),
+    'endpoint' => env('AI_SERVICE_URL')
+],
+```
+
+### 6. Configuração do Mailtrap
+#### 6.1 Adicione no seu .env:
+
+```ini
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=seu_username_mailtrap
+MAIL_PASSWORD=sua_password_mailtrap
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="no-reply@feedbacksystem.com"
+MAIL_FROM_NAME="Sistema de Feedback"
+```
+
+#### 6.2 Configure no arquivo config/mail.php:
+
+```php
+'from' => [
+    'address' => env('MAIL_FROM_ADDRESS', 'no-reply@feedbacksystem.com'),
+    'name' => env('MAIL_FROM_NAME', 'Sistema de Feedback'),
+],
+```
+
+### 7. Executar migrações
 
 ```bash
 php artisan migrate --seed
 ```
 
-### 6. Iniciar servidor
+### 8. Iniciar servidor
 
 ```bash
 
